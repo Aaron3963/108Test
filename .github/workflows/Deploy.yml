@@ -19,13 +19,13 @@ jobs:
           python-version: 3.9  # Replace with your desired Python version
 
       - name: Install dependencies
-        run: pip install nbconvert jupyter
+        run: pip install nbconvert jupyter pretty-jupyter
 
-      - name: Convert Notebook to HTML
-        run: jupyter nbconvert --to html FinalProject_Group088_FA23.ipynb  # Replace with the actual filename
+      - name: Convert Notebook to HTML using pretty jupyder
+        run: jupyter nbconvert --to html --template pj notebook.ipynb  # Replace with the actual filename
       
       - name: Rename HTML file to index.html
-        run: mv FinalProject_Group088_FA23.html index.html  # Replace with the actual filename
+        run: mv notebook.html index.html  # Replace with the actual filename
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

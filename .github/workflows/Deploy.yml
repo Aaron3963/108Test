@@ -23,6 +23,9 @@ jobs:
 
       - name: Convert Notebook to HTML
         run: jupyter nbconvert --to html FinalProject_Group088_FA23.ipynb  # Replace with the actual filename
+      
+      - name: Rename HTML file to index.html
+        run: mv your_notebook.html index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

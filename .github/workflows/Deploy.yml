@@ -16,13 +16,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.x  # Replace with your desired Python version
+          python-version: 3.9  # Replace with your desired Python version
 
       - name: Install dependencies
         run: pip install nbconvert jupyter
 
       - name: Convert Notebook to HTML
-        run: jupyter nbconvert --to html your_notebook.ipynb  # Replace with the actual filename
+        run: jupyter nbconvert --to html FinalProject_Group088_FA23.ipynb  # Replace with the actual filename
 
       - name: Deploy to GitHub Pages
         run: |

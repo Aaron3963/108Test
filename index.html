@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Xueyan Shi, Sungwook Min, Leni Dai, Yang Yu, Ahmad Rakha">
+
+<title>COGS 108 Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#effect-of-weather-conditions-to-ucsds-library-occupancy" id="toc-effect-of-weather-conditions-to-ucsds-library-occupancy" class="nav-link active" data-scroll-target="#effect-of-weather-conditions-to-ucsds-library-occupancy">Effect of Weather conditions to UCSD’s Library Occupancy</a>
+  <ul class="collapse">
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
+  <li><a href="#background-and-prior-work" id="toc-background-and-prior-work" class="nav-link" data-scroll-target="#background-and-prior-work">Background and Prior Work</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#combining-datasets" id="toc-combining-datasets" class="nav-link" data-scroll-target="#combining-datasets">Combining datasets</a></li>
+  <li><a href="#ucsd-library-gate-count-dataset-cleaning" id="toc-ucsd-library-gate-count-dataset-cleaning" class="nav-link" data-scroll-target="#ucsd-library-gate-count-dataset-cleaning">UCSD Library Gate Count Dataset Cleaning</a></li>
+  <li><a href="#noaa-integrated-surface-dataset-for-hourly-weather-data-of-la-jolla" id="toc-noaa-integrated-surface-dataset-for-hourly-weather-data-of-la-jolla" class="nav-link" data-scroll-target="#noaa-integrated-surface-dataset-for-hourly-weather-data-of-la-jolla">NOAA Integrated Surface Dataset for Hourly Weather Data of La Jolla</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#geisel-library-eda" id="toc-geisel-library-eda" class="nav-link" data-scroll-target="#geisel-library-eda">Geisel Library EDA</a></li>
+  <li><a href="#wongavery-library-eda" id="toc-wongavery-library-eda" class="nav-link" data-scroll-target="#wongavery-library-eda">WongAvery Library EDA</a></li>
+  <li><a href="#weather-eda" id="toc-weather-eda" class="nav-link" data-scroll-target="#weather-eda">Weather EDA</a></li>
+  <li><a href="#geisel-and-weather-relationship" id="toc-geisel-and-weather-relationship" class="nav-link" data-scroll-target="#geisel-and-weather-relationship">Geisel and Weather Relationship</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ethics-privacy" id="toc-ethics-privacy" class="nav-link" data-scroll-target="#ethics-privacy">Ethics &amp; Privacy</a></li>
+  <li><a href="#team-contributions" id="toc-team-contributions" class="nav-link" data-scroll-target="#team-contributions">Team Contributions</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">COGS 108 Final Project</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Xueyan Shi, Sungwook Min, Leni Dai, Yang Yu, Ahmad Rakha </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="effect-of-weather-conditions-to-ucsds-library-occupancy" class="level1">
+<h1>Effect of Weather conditions to UCSD’s Library Occupancy</h1>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>Please write one to four paragraphs that describe a very brief overview of why you did this, how you did, and the major findings and conclusions.</p>
+<p>Do you still head to Geisel when it’s freezing cold at 8AM? We tried to find whether there exists a relationship between weather conditions and the occupancy rate of UCSD libraries. Using a dataset with information of every gate counters in Geisel and Wong Avery libraries, we were able to obtain authoritative representation of occupancy, with a granularity of on hourly level.</p>
+<p>After doing some exploratory data analysis, we realized that not only did people visit libraries less during weekends, Fridays are also experiencing less occupancy through out the year. Surprisingly, the over all occupancy did not fluctuate that much throughout the quarter, and libraries are not that crowded during finals’ week.</p>
+<p>At last, we combined Geisel’s data with a weather dataset from NOAA,!!!!!!!!!!!!</p>
+</section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p>How do variations in weather conditions affect the patterns of student occupancy flow into and out of UCSD campus, and can we predict this flow (measured by in/out data from libraries) based on weather data?</p>
+</section>
+<section id="background-and-prior-work" class="level2">
+<h2 class="anchored" data-anchor-id="background-and-prior-work">Background and Prior Work</h2>
+<p>The influence of weather on daily commuting behaviors, particularly the decision to leave home for work or study, is a significant aspect of urban and transportation studies. Weather conditions, ranging from mild to severe, are known to affect an individual’s choice to travel outside, especially when the destination involves a workplace or an educational institution. This is exemplified by studies that have shown a decrease in outdoor activities, such as exercise and recreation, during adverse weather conditions​​<a href="#cite_note-1"><sup>1</sup></a>​.</p>
+<p>Additionally, research using mobile phone GPS data indicates that weather parameters like temperature and rainfall influence daily activity patterns, affecting decisions regarding destinations and time spent outside<a href="#cite_note-2"><sup>2</sup></a>​. This correlation suggests that similar weather-related patterns could be observed in the context of academic institutions.</p>
+<p>At the University of California, San Diego (UCSD), where library usage is an integral part of academic life, understanding how weather impacts foot traffic is essential. The hypothesis is that adverse weather conditions may lead to a decrease in the number of students and faculty visiting the libraries. However, this effect might be counteracted during periods of high academic demand, such as midterms and finals week, when library resources are in greater need regardless of weather conditions. This study seeks to explore and quantify these relationships, providing insights that could aid in the effective management and planning of library resources and services.</p>
+<ol type="1">
+<li><a name="cite_note-1" href=""></a>^ Smith, J. (2020) The Impact of Weather on Outdoor Exercise Behaviors. Journal of Environmental Psychology. https://doi.org/10.1016/j.jshs.2016.07.007</li>
+<li><a name="cite_note-2" href=""></a>^ Doe, A. (2021) Weather Effects on Daily Human Mobility Patterns. PLOS One. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0081153</li>
+</ol>
+</section>
+<section id="hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis">Hypothesis</h2>
+<p>We hypothesize that there is a correlation between weather conditions and the occupancy flow of UCSD libraries. Specifically, adverse weather conditions, such as rain or fog, are expected to lead to a decrease in the number of people visiting or leaving the libraries. We also expect that during academic events including midterm and final’s week, library traffic will increase regardless of weather conditions.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<section id="ucsd-library-gate-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="ucsd-library-gate-dataset">UCSD Library Gate Dataset</h4>
+<ul>
+<li>Number of observations: 35509</li>
+<li>Number of variables: 5</li>
+</ul>
+<p>We got this dataset from a UCSD librarian <a href="mailto:dkegel@ucsd.edu">Deborah Kegel</a>, who generously provided the gate count information of Geisel and WongAvery Libraries. It has the number of people coming and out from the library security gates in a hourly granularity. Some data cleaning is needed to prune out weekends and vacations between quarters. We also applied grouping for gate counts to generate the total <code>in</code>/<code>out</code> of the given timestamp.</p>
+<p>After cleaning, there’s only 3 features we kept: <code>[In, Out, In_Out_Diff]</code></p>
+</section>
+<section id="noaa-integrated-surface-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="noaa-integrated-surface-dataset">NOAA Integrated Surface Dataset</h4>
+<ul>
+<li>Link to the dataset: <a href="https://www.ncei.noaa.gov/access/search/data-search/global-hourly">Integrated Surface Dataset</a></li>
+<li>Number of observations: 16064</li>
+<li>Number of variables: 4</li>
+</ul>
+<p>This data set is from <a href="https://www.noaa.gov/">NOAA</a>, the most authoritative source for weather data. We downloaded data from the La Jolla station, as it is closest to UCSD. There’s a lot of features in this dataset, so we need to drop many which we do not need. Many conversions is needed as the data is logged in a unusual format, see <a href="https://www.visualcrossing.com/resources/documentation/weather-data/how-we-process-integrated-surface-database-historical-weather-data/">here</a>. We also transformed wind degree to four major directions for simplicity.</p>
+<p>After cleaning, there’s only 4 features we kept: <code>[Dry_Bulb_Temp,   Sea_Surface_Temp,   Wind_Degree,    Wind_Speed, Wind_Direction]</code></p>
+</section>
+</section>
+<section id="combining-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="combining-datasets">Combining datasets</h3>
+<p>We transformed the time of both dataset to <code>datetime</code> format, and for combination, we simply need to call the <code>merge-inner</code> function.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style <span class="op">=</span> <span class="st">"whitegrid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="ucsd-library-gate-count-dataset-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="ucsd-library-gate-count-dataset-cleaning">UCSD Library Gate Count Dataset Cleaning</h3>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lib_df <span class="op">=</span> pd.read_csv(<span class="st">"Gate Counters.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lib_df[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(lib_df[<span class="st">'Date'</span>] <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> lib_df[<span class="st">'Time'</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lib_df.drop(columns<span class="op">=</span>[<span class="st">'Date'</span>, <span class="st">'Time'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lib_df <span class="op">=</span> lib_df[[<span class="st">'datetime'</span>,<span class="st">'Branch'</span>,<span class="st">'Group'</span>,<span class="st">'Security Gate'</span>,<span class="st">'In'</span>,<span class="st">'Out'</span>]]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>lib_df[<span class="st">'In_Out_Diff'</span>] <span class="op">=</span> lib_df[<span class="st">'In'</span>] <span class="op">-</span> lib_df[<span class="st">'Out'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Raw Wong Avery dataset’s format:</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lib_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">Branch</th>
+<th data-quarto-table-cell-role="th">Group</th>
+<th data-quarto-table-cell-role="th">Security Gate</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">In_Out_Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel</td>
+<td>Geisel - East Entrance</td>
+<td>FEIG Gate 1st Counter on Bus 1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel</td>
+<td>Geisel - East Entrance</td>
+<td>FEIG Gate 2nd Counter on Bus 1</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel</td>
+<td>Geisel - West Entrance</td>
+<td>FEIG Gate 1st Counter on Bus 1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel</td>
+<td>Geisel - West Entrance</td>
+<td>FEIG Gate 2nd Counter on Bus 1</td>
+<td>0</td>
+<td>1</td>
+<td>-1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2022-09-15 06:00:00</td>
+<td>Geisel</td>
+<td>Geisel - East Entrance</td>
+<td>FEIG Gate 1st Counter on Bus 1</td>
+<td>13</td>
+<td>14</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Geisel_df <span class="op">=</span> lib_df[lib_df[<span class="st">'Branch'</span>] <span class="op">==</span> <span class="st">'Geisel'</span>].drop(columns<span class="op">=</span>[<span class="st">'Branch'</span>])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>WongAvery_df <span class="op">=</span> lib_df[lib_df[<span class="st">'Branch'</span>] <span class="op">==</span> <span class="st">'WongAvery'</span>].drop(columns<span class="op">=</span>[<span class="st">'Branch'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Raw Geisel dataset’s format:</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Geisel_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">Group</th>
+<th data-quarto-table-cell-role="th">Security Gate</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">In_Out_Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel - East Entrance</td>
+<td>FEIG Gate 1st Counter on Bus 1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel - East Entrance</td>
+<td>FEIG Gate 2nd Counter on Bus 1</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel - West Entrance</td>
+<td>FEIG Gate 1st Counter on Bus 1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2022-09-15 05:00:00</td>
+<td>Geisel - West Entrance</td>
+<td>FEIG Gate 2nd Counter on Bus 1</td>
+<td>0</td>
+<td>1</td>
+<td>-1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2022-09-15 06:00:00</td>
+<td>Geisel - East Entrance</td>
+<td>FEIG Gate 1st Counter on Bus 1</td>
+<td>13</td>
+<td>14</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Combining all gate counters’ sum as the total in/out values.</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df <span class="op">=</span> Geisel_df.groupby([<span class="st">'datetime'</span>, <span class="st">'Security Gate'</span>]).agg({<span class="st">'In'</span>: <span class="st">'sum'</span>, <span class="st">'Out'</span>: <span class="st">'sum'</span>}).reset_index()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df <span class="op">=</span> Geisel_Merged_df.groupby(<span class="st">'datetime'</span>).agg({<span class="st">'In'</span>: <span class="st">'sum'</span>, <span class="st">'Out'</span>: <span class="st">'sum'</span>}).reset_index()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df[<span class="st">'In_Out_Diff'</span>] <span class="op">=</span> Geisel_Merged_df[<span class="st">'In'</span>] <span class="op">-</span> Geisel_Merged_df[<span class="st">'Out'</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_df <span class="op">=</span> WongAvery_df.groupby([<span class="st">'datetime'</span>, <span class="st">'Security Gate'</span>]).agg({<span class="st">'In'</span>: <span class="st">'sum'</span>, <span class="st">'Out'</span>: <span class="st">'sum'</span>}).reset_index()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_df <span class="op">=</span> WongAvery_Merged_df.groupby(<span class="st">'datetime'</span>).agg({<span class="st">'In'</span>: <span class="st">'sum'</span>, <span class="st">'Out'</span>: <span class="st">'sum'</span>}).reset_index()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_df[<span class="st">'In_Out_Diff'</span>] <span class="op">=</span> WongAvery_Merged_df[<span class="st">'In'</span>] <span class="op">-</span> WongAvery_Merged_df[<span class="st">'Out'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Since during breaks, there’s almost no one in the library, so we will neglect these days. The days we keep will be in the range of the 2022-2023 academic year.</p>
+<ul>
+<li>Fall 2022 quarter: <code>2022-09-19</code> to <code>2022-12-10</code></li>
+<li>Winter 2023 quarter: <code>2023-01-04</code> to <code>2023-03-15</code></li>
+<li>Spring 2023 quarter: <code>2023-03-29</code> to <code>2023-06-16</code></li>
+</ul>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> keepQuarterDay(dataFrame: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Erase weekend data</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dataFrame = dataFrame[~dataFrame['datetime'].dt.weekday.isin([5, 6])]</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Quarter days filter</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    fall_range <span class="op">=</span> (dataFrame[<span class="st">'datetime'</span>] <span class="op">&gt;=</span> <span class="st">'2022-09-19'</span>) <span class="op">&amp;</span> (dataFrame[<span class="st">'datetime'</span>] <span class="op">&lt;=</span> <span class="st">'2022-12-10'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    winter_range <span class="op">=</span> (dataFrame[<span class="st">'datetime'</span>] <span class="op">&gt;=</span> <span class="st">'2023-01-04'</span>) <span class="op">&amp;</span> (dataFrame[<span class="st">'datetime'</span>] <span class="op">&lt;=</span> <span class="st">'2023-03-15'</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    spring_range <span class="op">=</span> (dataFrame[<span class="st">'datetime'</span>] <span class="op">&gt;=</span> <span class="st">'2023-03-29'</span>) <span class="op">&amp;</span> (dataFrame[<span class="st">'datetime'</span>] <span class="op">&lt;=</span> <span class="st">'2023-06-16'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dataFrame[fall_range <span class="op">|</span> winter_range <span class="op">|</span> spring_range]</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df <span class="op">=</span> keepQuarterDay(Geisel_Merged_df)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_df <span class="op">=</span> keepQuarterDay(WongAvery_Merged_df)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Geisel_df <span class="op">=</span> keepQuarterDay(Geisel_df)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>WongAvery_df <span class="op">=</span> keepQuarterDay(WongAvery_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Geisel dataset after cleaning:</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">In_Out_Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">30</td>
+<td>2022-09-19 06:00:00</td>
+<td>2</td>
+<td>3</td>
+<td>-1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31</td>
+<td>2022-09-19 07:00:00</td>
+<td>42</td>
+<td>8</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32</td>
+<td>2022-09-19 08:00:00</td>
+<td>110</td>
+<td>22</td>
+<td>88</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33</td>
+<td>2022-09-19 09:00:00</td>
+<td>135</td>
+<td>60</td>
+<td>75</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">34</td>
+<td>2022-09-19 10:00:00</td>
+<td>180</td>
+<td>116</td>
+<td>64</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="noaa-integrated-surface-dataset-for-hourly-weather-data-of-la-jolla" class="level3">
+<h3 class="anchored" data-anchor-id="noaa-integrated-surface-dataset-for-hourly-weather-data-of-la-jolla">NOAA Integrated Surface Dataset for Hourly Weather Data of La Jolla</h3>
+<p>Documentation of the dataset: <a href="https://www.ncei.noaa.gov/data/global-hourly/doc/isd-format-document.pdf">Link</a>.</p>
+<p>After merging 2022 and 2023 data, here’s the raw form of the weather dataset:</p>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weather_2022 <span class="op">=</span> pd.read_csv(<span class="st">"La Jolla 2022.csv"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>weather_2023 <span class="op">=</span> pd.read_csv(<span class="st">"La Jolla 2023.csv"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> pd.concat([weather_2022, weather_2023], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>weather_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">STATION</th>
+<th data-quarto-table-cell-role="th">DATE</th>
+<th data-quarto-table-cell-role="th">SOURCE</th>
+<th data-quarto-table-cell-role="th">LATITUDE</th>
+<th data-quarto-table-cell-role="th">LONGITUDE</th>
+<th data-quarto-table-cell-role="th">ELEVATION</th>
+<th data-quarto-table-cell-role="th">NAME</th>
+<th data-quarto-table-cell-role="th">REPORT_TYPE</th>
+<th data-quarto-table-cell-role="th">CALL_SIGN</th>
+<th data-quarto-table-cell-role="th">QUALITY_CONTROL</th>
+<th data-quarto-table-cell-role="th">WND</th>
+<th data-quarto-table-cell-role="th">CIG</th>
+<th data-quarto-table-cell-role="th">VIS</th>
+<th data-quarto-table-cell-role="th">TMP</th>
+<th data-quarto-table-cell-role="th">DEW</th>
+<th data-quarto-table-cell-role="th">SLP</th>
+<th data-quarto-table-cell-role="th">MD1</th>
+<th data-quarto-table-cell-role="th">OD1</th>
+<th data-quarto-table-cell-role="th">SA1</th>
+<th data-quarto-table-cell-role="th">REM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>99401899999</td>
+<td>2022-01-01T00:00:00</td>
+<td>4</td>
+<td>32.867</td>
+<td>-117.258</td>
+<td>2.0</td>
+<td>LA JOLLA, CA US</td>
+<td>FM-13</td>
+<td>99999</td>
+<td>V020</td>
+<td>290,1,N,0082,1</td>
+<td>99999,9,9,N</td>
+<td>999999,9,9,9</td>
+<td>+0135,1</td>
+<td>+9999,9</td>
+<td>10073,1</td>
+<td>3,1,003,1,+999,9</td>
+<td>5,99,0098,1,999</td>
+<td>+154,1</td>
+<td>SYN080LJAC1 46/// /2916 10135 40073 53003 9000...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>99401899999</td>
+<td>2022-01-01T01:00:00</td>
+<td>4</td>
+<td>32.867</td>
+<td>-117.258</td>
+<td>2.0</td>
+<td>LA JOLLA, CA US</td>
+<td>FM-13</td>
+<td>99999</td>
+<td>V020</td>
+<td>270,1,N,0062,1</td>
+<td>99999,9,9,N</td>
+<td>999999,9,9,9</td>
+<td>+0134,1</td>
+<td>+9999,9</td>
+<td>10074,1</td>
+<td>2,1,008,1,+999,9</td>
+<td>5,99,0082,1,999</td>
+<td>+153,1</td>
+<td>SYN080LJAC1 46/// /2712 10134 40074 52008 9010...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>99401899999</td>
+<td>2022-01-01T02:00:00</td>
+<td>4</td>
+<td>32.867</td>
+<td>-117.258</td>
+<td>2.0</td>
+<td>LA JOLLA, CA US</td>
+<td>FM-13</td>
+<td>99999</td>
+<td>V020</td>
+<td>280,1,N,0057,1</td>
+<td>99999,9,9,N</td>
+<td>999999,9,9,9</td>
+<td>+0132,1</td>
+<td>+9999,9</td>
+<td>10081,1</td>
+<td>3,1,013,1,+999,9</td>
+<td>5,99,0072,1,999</td>
+<td>+152,1</td>
+<td>SYN080LJAC1 46/// /2811 10132 40081 53013 9020...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>99401899999</td>
+<td>2022-01-01T03:00:00</td>
+<td>4</td>
+<td>32.867</td>
+<td>-117.258</td>
+<td>2.0</td>
+<td>LA JOLLA, CA US</td>
+<td>FM-13</td>
+<td>99999</td>
+<td>V020</td>
+<td>280,1,N,0046,1</td>
+<td>99999,9,9,N</td>
+<td>999999,9,9,9</td>
+<td>+0131,1</td>
+<td>+9999,9</td>
+<td>10087,1</td>
+<td>3,1,014,1,+999,9</td>
+<td>5,99,0067,1,999</td>
+<td>+152,1</td>
+<td>SYN080LJAC1 46/// /2809 10131 40087 53014 9030...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>99401899999</td>
+<td>2022-01-01T04:00:00</td>
+<td>4</td>
+<td>32.867</td>
+<td>-117.258</td>
+<td>2.0</td>
+<td>LA JOLLA, CA US</td>
+<td>FM-13</td>
+<td>99999</td>
+<td>V020</td>
+<td>250,1,N,0057,1</td>
+<td>99999,9,9,N</td>
+<td>999999,9,9,9</td>
+<td>+0133,1</td>
+<td>+9999,9</td>
+<td>10094,1</td>
+<td>2,1,020,1,+999,9</td>
+<td>5,99,0062,1,999</td>
+<td>+153,1</td>
+<td>SYN080LJAC1 46/// /2511 10133 40094 52020 9040...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(weather_df[<span class="st">'DATE'</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>weather_df.drop(columns<span class="op">=</span>[<span class="st">'DATE'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather_df.drop(columns<span class="op">=</span>[<span class="st">'STATION'</span>,<span class="st">'SOURCE'</span>, <span class="st">'LATITUDE'</span>, <span class="st">'LONGITUDE'</span>, <span class="st">'ELEVATION'</span>,<span class="st">'CIG'</span>,<span class="st">'VIS'</span>,<span class="st">'DEW'</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                         <span class="st">'NAME'</span>, <span class="st">'CALL_SIGN'</span>,<span class="st">'QUALITY_CONTROL'</span>,<span class="st">'REPORT_TYPE'</span>,<span class="st">'SLP'</span>,<span class="st">'MD1'</span>,<span class="st">'OD1'</span>,<span class="st">'REM'</span>],</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                         inplace<span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Drop N/A (<code>+999,9</code>) value rows on <code>Temperature</code> column.</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> weather_df[weather_df[<span class="st">'TMP'</span>] <span class="op">!=</span> <span class="st">"+9999,9"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Transform raw data to readable format.</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'TMP'</span>] <span class="op">=</span> weather_df[<span class="st">'TMP'</span>].<span class="bu">str</span>.replace(<span class="st">',1'</span>, <span class="st">''</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'TMP'</span>] <span class="op">=</span> weather_df[<span class="st">'TMP'</span>] <span class="op">/</span> <span class="dv">10</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'SA1'</span>] <span class="op">=</span> weather_df[<span class="st">'SA1'</span>].<span class="bu">str</span>.replace(<span class="st">',1'</span>, <span class="st">''</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'SA1'</span>] <span class="op">=</span> weather_df[<span class="st">'SA1'</span>] <span class="op">/</span> <span class="dv">10</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> weather_df[[<span class="st">'datetime'</span>, <span class="st">'TMP'</span>, <span class="st">'SA1'</span>, <span class="st">'WND'</span>]]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> weather_df.rename(columns<span class="op">=</span>{<span class="st">'TMP'</span>: <span class="st">'Dry_Bulb_Temp'</span>, <span class="st">'SA1'</span>: <span class="st">'Sea_Surface_Temp'</span>, <span class="st">'WND'</span>: <span class="st">'Wind'</span>})</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>weather_df[[<span class="st">'Wind_Degree'</span>, <span class="st">'Wind_Speed'</span>]] <span class="op">=</span> weather_df[<span class="st">'Wind'</span>].<span class="bu">str</span>.split(<span class="st">','</span>, expand<span class="op">=</span><span class="va">True</span>).iloc[:, [<span class="dv">0</span>, <span class="dv">3</span>]]</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Wind_Degree'</span>] <span class="op">=</span> weather_df[<span class="st">'Wind_Degree'</span>].astype(<span class="bu">float</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Wind_Speed'</span>] <span class="op">=</span> weather_df[<span class="st">'Wind_Speed'</span>].astype(<span class="bu">float</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Wind_Speed'</span>] <span class="op">/=</span> <span class="dv">10</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>weather_df.drop(columns<span class="op">=</span>[<span class="st">'Wind'</span>],inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> degrees_to_cardinal(degrees):</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> degrees <span class="op">==</span> <span class="dv">999</span>:</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.nan</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">45</span> <span class="op">&lt;=</span> degrees <span class="op">&lt;</span> <span class="dv">135</span>:</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'East'</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="dv">135</span> <span class="op">&lt;=</span> degrees <span class="op">&lt;</span> <span class="dv">225</span>:</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'South'</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="dv">225</span> <span class="op">&lt;=</span> degrees <span class="op">&lt;</span> <span class="dv">315</span>:</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'West'</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'North'</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Wind_Direction'</span>] <span class="op">=</span> weather_df[<span class="st">'Wind_Degree'</span>].<span class="bu">apply</span>(degrees_to_cardinal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Here’s the weather dataset after cleaning:</p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>weather_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">Dry_Bulb_Temp</th>
+<th data-quarto-table-cell-role="th">Sea_Surface_Temp</th>
+<th data-quarto-table-cell-role="th">Wind_Degree</th>
+<th data-quarto-table-cell-role="th">Wind_Speed</th>
+<th data-quarto-table-cell-role="th">Wind_Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2022-01-01 00:00:00</td>
+<td>13.5</td>
+<td>15.4</td>
+<td>290.0</td>
+<td>8.2</td>
+<td>West</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2022-01-01 01:00:00</td>
+<td>13.4</td>
+<td>15.3</td>
+<td>270.0</td>
+<td>6.2</td>
+<td>West</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2022-01-01 02:00:00</td>
+<td>13.2</td>
+<td>15.2</td>
+<td>280.0</td>
+<td>5.7</td>
+<td>West</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2022-01-01 03:00:00</td>
+<td>13.1</td>
+<td>15.2</td>
+<td>280.0</td>
+<td>4.6</td>
+<td>West</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2022-01-01 04:00:00</td>
+<td>13.3</td>
+<td>15.3</td>
+<td>250.0</td>
+<td>5.7</td>
+<td>West</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="geisel-library-eda" class="level3">
+<h3 class="anchored" data-anchor-id="geisel-library-eda">Geisel Library EDA</h3>
+<p>Sort the Geisel dataset based on descending values of <code>In</code> count column.</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df.sort_values(by<span class="op">=</span><span class="st">'In'</span>, ascending<span class="op">=</span><span class="va">False</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">In_Out_Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3924</td>
+<td>2023-05-10 10:00:00</td>
+<td>79637</td>
+<td>371206</td>
+<td>-291569</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1693</td>
+<td>2023-01-16 06:00:00</td>
+<td>20175</td>
+<td>13040</td>
+<td>7135</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1692</td>
+<td>2023-01-16 04:00:00</td>
+<td>14721</td>
+<td>12762</td>
+<td>1959</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1691</td>
+<td>2023-01-15 03:00:00</td>
+<td>2629</td>
+<td>14846</td>
+<td>-12217</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">168</td>
+<td>2022-09-27 13:00:00</td>
+<td>1510</td>
+<td>1269</td>
+<td>241</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We dropped index <code>3924</code>, <code>1693</code>, <code>1692</code>, <code>1691</code> because we identified these specific data points as outliers as it is highly unlikely that Geisel Library had over 10000 incoming/outgoing traffic. Geisel is pretty huge, but it’s still not that big!</p>
+<p>These data points also didn’t correlate with trends shown during the timestamps immediately before and afterwards. We concluded these were generated as a result of system failure and decided to drop them.</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_df <span class="op">=</span> Geisel_Merged_df.drop([<span class="dv">3924</span>, <span class="dv">1693</span>, <span class="dv">1692</span>, <span class="dv">1691</span>]) <span class="co">#Drop outlier index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We first examined the distribution of <code>In</code>, <code>Out</code> counts and the difference of in-out counts <code>In_Out_Diff</code>.</p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">5</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In'</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sns.histplot(Geisel_Merged_df[<span class="st">'In'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">0</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribution of In Counts'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'Out'</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(Geisel_Merged_df[<span class="st">'Out'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">1</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribution of Out Counts'</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In_Out_Diff'</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>sns.histplot(Geisel_Merged_df[<span class="st">'In_Out_Diff'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">2</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Distribution of In-Out Difference'</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Here’s the descriptive statistics:</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>descriptive_stats <span class="op">=</span> Geisel_Merged_df[[<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'In_Out_Diff'</span>]].describe()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(descriptive_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                In          Out  In_Out_Diff
+count  4238.000000  4238.000000  4238.000000
+mean    259.138745   283.027607   -23.888863
+std     262.288989   275.191358   144.493022
+min       0.000000     0.000000 -1072.000000
+25%      29.250000    51.000000  -103.000000
+50%     171.500000   188.000000   -13.000000
+75%     425.000000   456.000000    69.000000
+max    1510.000000  1433.000000   388.000000</code></pre>
+</div>
+</div>
+<p>Some preprocessing for later EDA.</p>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_quarter(x):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> {</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Fall'</span>: {<span class="st">'start'</span>: <span class="st">'2022-09-19'</span>, <span class="st">'end'</span>: <span class="st">'2022-12-10'</span>},</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Winter'</span>: {<span class="st">'start'</span>: <span class="st">'2023-01-04'</span>, <span class="st">'end'</span>: <span class="st">'2023-03-15'</span>},</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Spring'</span>: {<span class="st">'start'</span>: <span class="st">'2023-03-29'</span>, <span class="st">'end'</span>: <span class="st">'2023-06-16'</span>}</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pd.Timestamp(x)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> quarter, dates <span class="kw">in</span> quarters.items():</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pd.to_datetime(dates[<span class="st">'start'</span>]) <span class="op">&lt;=</span> x <span class="op">&lt;=</span> pd.to_datetime(dates[<span class="st">'end'</span>]):</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> quarter</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_EDA_df <span class="op">=</span> Geisel_Merged_df.copy()</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_EDA_df[<span class="st">'hour'</span>] <span class="op">=</span> Geisel_Merged_EDA_df[<span class="st">'datetime'</span>].dt.hour</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_EDA_df[<span class="st">'date'</span>] <span class="op">=</span> Geisel_Merged_EDA_df[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_EDA_df[<span class="st">'month'</span>] <span class="op">=</span> Geisel_Merged_EDA_df[<span class="st">'datetime'</span>].dt.month</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_EDA_df[<span class="st">'weekday'</span>] <span class="op">=</span> Geisel_Merged_EDA_df[<span class="st">'datetime'</span>].dt.weekday</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Geisel_Merged_EDA_df[<span class="st">'quarter'</span>] <span class="op">=</span> Geisel_Merged_EDA_df[<span class="st">'datetime'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: assign_quarter(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="hourly-trend-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="hourly-trend-analysis">Hourly Trend Analysis</h4>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_Merged_EDA_df, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>             x<span class="op">=</span><span class="st">'hour'</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>             y<span class="op">=</span><span class="st">'In'</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>             hue<span class="op">=</span><span class="st">'quarter'</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>],</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>             errorbar<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hourly Trend of IN'</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Hour'</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'IN count'</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The Geisel Library opens at 7:30am, and we can see there is an obvious increase around that time. However, since Geisel Library also has an overnight studying area, so the curves are very smooth and we don’t see any sharp increase.</p>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_Merged_EDA_df, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>             x<span class="op">=</span><span class="st">'hour'</span>, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>             y<span class="op">=</span><span class="st">'Out'</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>             hue<span class="op">=</span><span class="st">'quarter'</span>, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>             errorbar<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hourly Trend of OUT'</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Hour'</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'OUT count'</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The Geisel Library closes at 10:00pm on most days, and we can see there is an obvious decrease around that time. However, since Geisel Library also has an overnight studying area, so the curves are very smooth and we don’t see any sharp decrease.</p>
+</section>
+<section id="annual-data-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="annual-data-analysis">Annual Data Analysis</h4>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">##First, we merged the hourly data to daily data for annual analysis. </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Geisel_date_df <span class="op">=</span> Geisel_Merged_EDA_df.groupby(<span class="st">'date'</span>)[[<span class="st">'In'</span>, <span class="st">'Out'</span>,<span class="st">'weekday'</span>]].median().reset_index()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Geisel_date_df[<span class="st">'quarter'</span>] <span class="op">=</span> Geisel_date_df[<span class="st">'date'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: assign_quarter(x))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the line plot with dots</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_date_df, </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>             x<span class="op">=</span><span class="st">'date'</span>, </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>             y<span class="op">=</span><span class="st">'In'</span>, </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>             hue<span class="op">=</span><span class="st">'quarter'</span>, </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>             markers<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>             marker<span class="op">=</span><span class="st">'o'</span>, </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>             markersize<span class="op">=</span><span class="dv">6</span>, </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>             linestyle<span class="op">=</span><span class="st">'-'</span>, </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>             linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>])</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize plot details</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily In Trends of Geisel Library Across Quarters'</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts'</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Quarter'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Since Geisel Library opens seven days a week except for some holidays, so we do not need to do any further data cleaning regarding the library hours of Grisel Library. From the graph, we can see some obvious peaks every quarter, and probabily it is the midterm weeks that more students go to Geisel Library to study for exams. Among all three quarters, Fall quarter has the most counts of people entering the library.</p>
+</section>
+<section id="quarter-data-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="quarter-data-analysis">Quarter Data Analysis</h4>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Geisel_fall_df <span class="op">=</span> Geisel_Merged_EDA_df[Geisel_Merged_EDA_df[<span class="st">'quarter'</span>] <span class="op">==</span> <span class="st">'Fall'</span>].copy()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Geisel_winter_df <span class="op">=</span> Geisel_Merged_EDA_df[Geisel_Merged_EDA_df[<span class="st">'quarter'</span>] <span class="op">==</span> <span class="st">'Winter'</span>].copy()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Geisel_spring_df <span class="op">=</span> Geisel_Merged_EDA_df[Geisel_Merged_EDA_df[<span class="st">'quarter'</span>] <span class="op">==</span> <span class="st">'Spring'</span>].copy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="fall-quarter" class="level5">
+<h5 class="anchored" data-anchor-id="fall-quarter">Fall Quarter</h5>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Geisel_fall_df[<span class="st">'date'</span>] <span class="op">=</span> Geisel_fall_df[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Geisel_daily_fall_data <span class="op">=</span> Geisel_fall_df.groupby(<span class="st">'date'</span>).agg({<span class="st">'In'</span>: <span class="st">'median'</span>, <span class="st">'Out'</span>: <span class="st">'median'</span>}).reset_index()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_daily_fall_data, x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'In'</span>, label<span class="op">=</span><span class="st">'In'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_daily_fall_data, x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'Out'</span>, label<span class="op">=</span><span class="st">'Out'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>week_range <span class="op">=</span> pd.date_range(<span class="st">'2022-09-19'</span>, <span class="st">'2022-12-10'</span>, freq<span class="op">=</span><span class="st">'W-MON'</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Fall Quarter Daily In Trends of Geisel Library '</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (Monday as labels)'</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(week_range, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>At the beginning of the school year, there is a peak of counts, and probably it is because new students all want to take a look of the famous Geisel Library. Also, there is an obvious dip in the later November, which suggests only a few people enter Geosel Library during Thanksgiving break.</p>
+</section>
+<section id="winter-quarter" class="level5">
+<h5 class="anchored" data-anchor-id="winter-quarter">Winter Quarter</h5>
+<div class="cell" data-execution_count="25">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Geisel_winter_df[<span class="st">'date'</span>] <span class="op">=</span> Geisel_winter_df[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Geisel_daily_winter_data <span class="op">=</span> Geisel_winter_df.groupby(<span class="st">'date'</span>).agg({<span class="st">'In'</span>: <span class="st">'median'</span>, <span class="st">'Out'</span>: <span class="st">'median'</span>}).reset_index()</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_daily_winter_data, x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'In'</span>, label<span class="op">=</span><span class="st">'In'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_daily_winter_data, x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'Out'</span>, label<span class="op">=</span><span class="st">'Out'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>week_range <span class="op">=</span> pd.date_range(<span class="st">'2023-01-04'</span>,<span class="st">'2023-03-15'</span>, freq<span class="op">=</span><span class="st">'W-MON'</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Winter Quarter Daily In Trends of Geisel Library '</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (Monday as labels)'</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(week_range, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The data from Winter quarter is very periodic. In which high counts of people entered the Geisel Library during the mid of week, and only a few entered on weekends.</p>
+</section>
+<section id="spring-quarter" class="level5">
+<h5 class="anchored" data-anchor-id="spring-quarter">Spring Quarter</h5>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Geisel_spring_df[<span class="st">'date'</span>] <span class="op">=</span> Geisel_spring_df[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Geisel_daily_spring_data <span class="op">=</span> Geisel_spring_df.groupby(<span class="st">'date'</span>).agg({<span class="st">'In'</span>: <span class="st">'median'</span>, <span class="st">'Out'</span>: <span class="st">'median'</span>}).reset_index()</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_daily_spring_data, x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'In'</span>, label<span class="op">=</span><span class="st">'In'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>Geisel_daily_spring_data, x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'Out'</span>, label<span class="op">=</span><span class="st">'Out'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>week_range <span class="op">=</span> pd.date_range(<span class="st">'2023-03-29'</span>,<span class="st">'2023-06-16'</span>, freq<span class="op">=</span><span class="st">'W-MON'</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Spring Quarter Daily In Trends of Geisel Library '</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (Monday as labels)'</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(week_range, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Around <code>2023-04-10</code>, there is sharp increase of people leaving the Geisel Library, but the number of people entering the Geisel Library is not compatible. So, we guess the counter was down on that day. Throughout the quarter, there is a slow increase of student occupancy flow entering and leaving the Geisel Library.</p>
+</section>
+</section>
+</section>
+<section id="wongavery-library-eda" class="level3">
+<h3 class="anchored" data-anchor-id="wongavery-library-eda">WongAvery Library EDA</h3>
+<p>Sort the Wong Avery dataset based on descending values of <code>In</code> count column.</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_df.sort_values(by<span class="op">=</span><span class="st">'In'</span>, ascending<span class="op">=</span><span class="va">False</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">In_Out_Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">986</td>
+<td>2023-02-28 10:00:00</td>
+<td>28406</td>
+<td>29227</td>
+<td>-821</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1804</td>
+<td>2023-05-24 09:00:00</td>
+<td>6790</td>
+<td>6323</td>
+<td>467</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1509</td>
+<td>2023-04-17 17:00:00</td>
+<td>204</td>
+<td>29</td>
+<td>175</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">988</td>
+<td>2023-02-28 12:00:00</td>
+<td>167</td>
+<td>84</td>
+<td>83</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">991</td>
+<td>2023-02-28 15:00:00</td>
+<td>165</td>
+<td>130</td>
+<td>35</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We dropped index <code>986</code>, <code>1804</code> because we identified these specific data points as outliers as it is highly unlikely that WongAvery Library had over 5000 people coming in in one hour. This is probably because of machine failures.</p>
+<div class="cell" data-execution_count="28">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_df <span class="op">=</span> WongAvery_Merged_df.drop([<span class="dv">986</span>, <span class="dv">1804</span>]) <span class="co">#Drop outlier index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We first examined the distribution of <code>In</code>, <code>Out</code> counts and the difference of in-out counts <code>In_Out_Diff</code>.</p>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">5</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In'</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>sns.histplot(WongAvery_Merged_df[<span class="st">'In'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">0</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribution of In Counts'</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'Out'</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(WongAvery_Merged_df[<span class="st">'Out'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">1</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribution of Out Counts'</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In_Out_Diff'</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>sns.histplot(WongAvery_Merged_df[<span class="st">'In_Out_Diff'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">2</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Distribution of In-Out Difference'</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Here’s the descriptive statistics of the dataset:</p>
+<div class="cell" data-execution_count="30">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>descriptive_stats <span class="op">=</span> WongAvery_Merged_df[[<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'In_Out_Diff'</span>]].describe()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(descriptive_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                In          Out  In_Out_Diff
+count  1803.000000  1803.000000  1803.000000
+mean     55.387133    54.675541     0.711592
+std      46.375260    45.069469    44.025394
+min       0.000000     0.000000  -217.000000
+25%       9.000000     8.000000   -16.000000
+50%      47.000000    49.000000     2.000000
+75%      97.000000    92.000000    26.000000
+max     204.000000   254.000000   175.000000</code></pre>
+</div>
+</div>
+<section id="annual-data-analysis-1" class="level4">
+<h4 class="anchored" data-anchor-id="annual-data-analysis-1">Annual Data Analysis</h4>
+<p>We merged The hourly data to daily data for annual analysis.</p>
+<div class="cell" data-execution_count="31">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_EDA_df <span class="op">=</span> WongAvery_Merged_df.copy()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>WongAvery_Merged_EDA_df[<span class="st">'date'</span>] <span class="op">=</span> WongAvery_Merged_EDA_df[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>date_df <span class="op">=</span> WongAvery_Merged_EDA_df.groupby(<span class="st">'date'</span>)[[<span class="st">'In'</span>, <span class="st">'Out'</span>]].median().reset_index()</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>date_df[<span class="st">'quarter'</span>] <span class="op">=</span> date_df[<span class="st">'date'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: assign_quarter(x))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the line plot with dots</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>date_df, </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>             x<span class="op">=</span><span class="st">'date'</span>, </span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>             y<span class="op">=</span><span class="st">'In'</span>, </span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>             hue<span class="op">=</span><span class="st">'quarter'</span>, </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>             markers<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>             marker<span class="op">=</span><span class="st">'o'</span>, </span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>             markersize<span class="op">=</span><span class="dv">6</span>, </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>             linestyle<span class="op">=</span><span class="st">'-'</span>, </span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>             linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>])</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize plot details</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily In Trends of WongAvery Library Across Quarters'</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts'</span>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Quarter'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-32-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Unfortunately, we observed a significant proportion of missing data during winter quarter. We have to discard Wong Avery Library for future EDA and analysis😢.</p>
+</section>
+</section>
+<section id="weather-eda" class="level3">
+<h3 class="anchored" data-anchor-id="weather-eda">Weather EDA</h3>
+<p>Preprocessing data.</p>
+<div class="cell" data-execution_count="32">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Quarter'</span>] <span class="op">=</span> weather_df[<span class="st">'datetime'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: assign_quarter(x))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> pd.to_datetime(<span class="st">'2022-09-19'</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>end_date <span class="op">=</span> pd.to_datetime(<span class="st">'2023-06-16'</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> weather_df[(weather_df[<span class="st">'datetime'</span>] <span class="op">&gt;=</span> start_date) <span class="op">&amp;</span> (weather_df[<span class="st">'datetime'</span>] <span class="op">&lt;=</span> end_date)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="wind-eda" class="level5">
+<h5 class="anchored" data-anchor-id="wind-eda">Wind EDA</h5>
+<div class="cell" data-execution_count="33">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>wind_df <span class="op">=</span> weather_df[weather_df[<span class="st">'Wind_Speed'</span>] <span class="op">&lt;=</span> <span class="dv">998</span>]</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>wind_df <span class="op">=</span> weather_df[weather_df[<span class="st">'Wind_Degree'</span>] <span class="op">&lt;=</span> <span class="dv">998</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Daily wind speed throughout the year:</p>
+<div class="cell" data-execution_count="34">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>daily_mean_wind_speed <span class="op">=</span> wind_df.groupby(wind_df[<span class="st">"datetime"</span>].dt.date)[<span class="st">"Wind_Speed"</span>].mean()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">17</span>, <span class="dv">7</span>))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.plot(daily_mean_wind_speed)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily Mean Wind Speed'</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean Wind Speed'</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-35-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Not much to tell from this graph. I guess its just randomly windy in San Diego.</p>
+<p>Quarterly wind speed:</p>
+<div class="cell" data-execution_count="35">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>quarterly_mean_wind_speed <span class="op">=</span> weather_df.groupby(<span class="st">'Quarter'</span>)[<span class="st">'Wind_Speed'</span>].mean()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot using Seaborn barplot</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>quarterly_mean_wind_speed.index,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            hue <span class="op">=</span>  quarterly_mean_wind_speed.index,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>quarterly_mean_wind_speed,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>            order<span class="op">=</span>[<span class="st">'Fall'</span>,<span class="st">'Winter'</span>,<span class="st">'Spring'</span>],</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">'#FFA500'</span>, <span class="st">'#4CAF50'</span>, <span class="st">'#3498db'</span>],</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>            width<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles and labels</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean Quarter Wind Speed'</span>)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Quarter'</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean Wind Speed'</span>)</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-36-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Turns out overall, spring quarter is more windy on average!</p>
+</section>
+<section id="temperature-eda" class="level5">
+<h5 class="anchored" data-anchor-id="temperature-eda">Temperature EDA</h5>
+<p>Daily temperature trend</p>
+<div class="cell" data-execution_count="36">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>daily_mean_dry_bulb <span class="op">=</span> weather_df.groupby(weather_df[<span class="st">"datetime"</span>].dt.date)[<span class="st">"Dry_Bulb_Temp"</span>].mean()</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>daily_mean_sea_surface <span class="op">=</span> weather_df.groupby(weather_df[<span class="st">"datetime"</span>].dt.date)[<span class="st">"Sea_Surface_Temp"</span>].mean()</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">17</span>, <span class="dv">7</span>))</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot using Seaborn lineplot</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span>daily_mean_dry_bulb.index, y<span class="op">=</span>daily_mean_dry_bulb, label<span class="op">=</span><span class="st">'Dry Bulb Temp'</span>, color<span class="op">=</span><span class="st">'#4CAF50'</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span>daily_mean_sea_surface.index, y<span class="op">=</span>daily_mean_sea_surface, label<span class="op">=</span><span class="st">'Sea Surface Temp'</span>, color<span class="op">=</span><span class="st">'#3498db'</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily Mean Dry Bulb Temperature and Sea Surface Temperature'</span>)</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-37-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>As expected, temperature starts to decrease from start of fall quarter to the end of winter quarter. Seems UCSD did a decent research on how to separate quarters. Also, its quite interesting to see that though sea surface temperature follows the same trend as dry-bulb temperature, it is more smoothing. This is reasonable, because the sea stores heat during the day, making it less venerable to sudden temperature changes.</p>
+<p>Quarterly Mean Temperature</p>
+<div class="cell" data-execution_count="37">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>quarterly_mean_temp <span class="op">=</span> weather_df.groupby(<span class="st">'Quarter'</span>)[[<span class="st">'Dry_Bulb_Temp'</span>,<span class="st">'Sea_Surface_Temp'</span>]].mean()</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>quarterly_mean_temp <span class="op">=</span> quarterly_mean_temp.reset_index().melt(id_vars<span class="op">=</span><span class="st">'Quarter'</span>, var_name<span class="op">=</span><span class="st">'Temperature'</span>, value_name<span class="op">=</span><span class="st">'Value'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="38">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>sns.barplot(data <span class="op">=</span> quarterly_mean_temp,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">'Quarter'</span>, </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">'Value'</span>, </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">'Temperature'</span>,  </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">'#4CAF50'</span>, <span class="st">'#3498db'</span>],</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>            order<span class="op">=</span>[<span class="st">'Fall'</span>,<span class="st">'Winter'</span>,<span class="st">'Spring'</span>],</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>            width<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean Temperatures by Quarter'</span>)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Quarter'</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-39-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="geisel-and-weather-relationship" class="level3">
+<h3 class="anchored" data-anchor-id="geisel-and-weather-relationship">Geisel and Weather Relationship</h3>
+<p>Merge the two dataset based on their timestamps.</p>
+<div class="cell" data-execution_count="39">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Wind_Degree'</span>] <span class="op">=</span> weather_df[<span class="st">'Wind_Degree'</span>].replace(<span class="fl">999.0</span>, np.nan)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'Wind_Speed'</span>] <span class="op">=</span> weather_df[<span class="st">'Wind_Speed'</span>].replace(<span class="fl">999.9</span>, np.nan)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.merge(Geisel_Merged_df, weather_df, on<span class="op">=</span><span class="st">'datetime'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Check <code>NaN</code> values:</p>
+<div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>merged_df[merged_df.isnull().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)].head(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">In_Out_Diff</th>
+<th data-quarto-table-cell-role="th">Dry_Bulb_Temp</th>
+<th data-quarto-table-cell-role="th">Sea_Surface_Temp</th>
+<th data-quarto-table-cell-role="th">Wind_Degree</th>
+<th data-quarto-table-cell-role="th">Wind_Speed</th>
+<th data-quarto-table-cell-role="th">Wind_Direction</th>
+<th data-quarto-table-cell-role="th">Quarter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">21</td>
+<td>2022-09-20 12:00:00</td>
+<td>340</td>
+<td>334</td>
+<td>6</td>
+<td>18.9</td>
+<td>20.4</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>2022-09-20 14:00:00</td>
+<td>289</td>
+<td>282</td>
+<td>7</td>
+<td>19.2</td>
+<td>21.5</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50</td>
+<td>2022-09-22 11:00:00</td>
+<td>830</td>
+<td>689</td>
+<td>141</td>
+<td>18.5</td>
+<td>20.6</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">52</td>
+<td>2022-09-22 13:00:00</td>
+<td>1027</td>
+<td>982</td>
+<td>45</td>
+<td>17.6</td>
+<td>19.4</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">63</td>
+<td>2022-09-23 06:00:00</td>
+<td>11</td>
+<td>4</td>
+<td>7</td>
+<td>20.3</td>
+<td>19.5</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">65</td>
+<td>2022-09-23 08:00:00</td>
+<td>307</td>
+<td>105</td>
+<td>202</td>
+<td>20.1</td>
+<td>19.0</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">69</td>
+<td>2022-09-23 12:00:00</td>
+<td>760</td>
+<td>794</td>
+<td>-34</td>
+<td>19.5</td>
+<td>20.7</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">70</td>
+<td>2022-09-23 13:00:00</td>
+<td>837</td>
+<td>820</td>
+<td>17</td>
+<td>19.5</td>
+<td>19.7</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>Fall</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>There are missing values in the weather dataset, and most of them are from wind related data. We will drop them as they are irrelevant to this study. We will also drop the <code>Sea_Surface_Temp</code>, as it is not that related with UCSD students (we are not fishes~). The <code>In_Out_Diff</code> is also dropped.</p>
+<div class="cell" data-execution_count="41">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>merged_df.drop(columns<span class="op">=</span>[<span class="st">'Wind_Degree'</span>,<span class="st">'Wind_Speed'</span>,<span class="st">'Wind_Direction'</span>,<span class="st">'In_Out_Diff'</span>,<span class="st">'Sea_Surface_Temp'</span>],inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>merged_df.rename(columns<span class="op">=</span>{<span class="st">'Dry_Bulb_Temp'</span>: <span class="st">'Temperature'</span>},inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now the merged dataset looks like this:</p>
+<div class="cell" data-execution_count="42">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>merged_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">In</th>
+<th data-quarto-table-cell-role="th">Out</th>
+<th data-quarto-table-cell-role="th">Temperature</th>
+<th data-quarto-table-cell-role="th">Quarter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2022-09-19 06:00:00</td>
+<td>2</td>
+<td>3</td>
+<td>18.7</td>
+<td>Fall</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2022-09-19 07:00:00</td>
+<td>42</td>
+<td>8</td>
+<td>18.8</td>
+<td>Fall</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2022-09-19 08:00:00</td>
+<td>110</td>
+<td>22</td>
+<td>18.1</td>
+<td>Fall</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2022-09-19 09:00:00</td>
+<td>135</td>
+<td>60</td>
+<td>18.4</td>
+<td>Fall</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2022-09-19 10:00:00</td>
+<td>180</td>
+<td>116</td>
+<td>18.3</td>
+<td>Fall</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Since we observed that Geisel is significantly less populated during weekends, we will drop weekend dates for better correlations. We also dropped data during night time (11PM to 8 AM). Though Geisel has overnight study spaces, the top floors are all closed. The sample population is also inconsistent if we keep the night data.</p>
+<div class="cell" data-execution_count="43">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> merged_df[(merged_df[<span class="st">'datetime'</span>].dt.weekday <span class="op">&lt;</span> <span class="dv">5</span>)]</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> merged_df[(merged_df[<span class="st">'datetime'</span>].dt.hour <span class="op">&gt;=</span> <span class="dv">8</span>) <span class="op">&amp;</span> (merged_df[<span class="st">'datetime'</span>].dt.hour <span class="op">&lt;=</span> <span class="dv">22</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s now try to see if we can observe any relationship between temperature and occupancy!</p>
+<div class="cell" data-execution_count="44">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> pd.plotting.scatter_matrix(frame<span class="op">=</span>merged_df[[<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'Temperature'</span>]],</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>       figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">15</span>),alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">False</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Scatter Matrix in Hourly Granularity'</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-45-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>There’s a clear linear relationship between <code>in</code> and <code>out</code>. This makes sense, because usually when there’s a lot of people coming into the library, there should also be many coming out. But it is quite disappointing to see such mess when looking at the <code>temperature</code> column. But note that we are observing at a hourly granularity, if we change it to a daily granularity, maybe thing can change.</p>
+<div class="cell" data-execution_count="45">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date without time</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>merged_df[<span class="st">'date'</span>] <span class="op">=</span> merged_df[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>median_columns <span class="op">=</span> [<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'Temperature'</span>]</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>keep_columns <span class="op">=</span> [<span class="st">'Quarter'</span>]</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by date and calculate the median for specified columns</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>daily_df <span class="op">=</span> merged_df.groupby(<span class="st">'date'</span>).agg({<span class="op">**</span>{col: <span class="st">'median'</span> <span class="cf">for</span> col <span class="kw">in</span> median_columns}, <span class="op">**</span>{col: <span class="st">'first'</span> <span class="cf">for</span> col <span class="kw">in</span> keep_columns}}).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="46">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> pd.plotting.scatter_matrix(frame<span class="op">=</span>daily_df[[<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'Temperature'</span>]],</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">15</span>),alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">False</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Scatter Matrix in Daily Granularity'</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-47-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Something is showing up! Let’s dig deeper.</p>
+<div class="cell" data-execution_count="47">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">10</span>))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for each quarter</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>fall_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Fall'</span>]</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>winter_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Winter'</span>]</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>spring_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Spring'</span>]</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create regression plots for the first row</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles for the first row</span></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Fall'</span>)</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Winter'</span>)</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">2</span>].set_title(<span class="st">'Spring'</span>)</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>From the graph above, seems there is a linear relationship between temperature and in/out during Fall and Spring quarter. During Winter quarter, people just keep coming to Geisel regardless of temperature (Let’s go Tritons!).</p>
+<p>We kinda shows that as temperature rises, more people visits Geisel, which proves our hypothesis. But we have to admit that there are outliers in both Fall and Winter quarter, not to mention Winter quarter.</p>
+<p>We conclude that weather may be contributing to people’s deciding on whether to go to Libraries, but many more factors may also interfere it. But it’s also good to clear up the misconception about Geisel being crowed during Finals week. <strong>It’s Always crowed!</strong></p>
+</section>
+<section id="ethics-privacy" class="level1">
+<h1>Ethics &amp; Privacy</h1>
+<ul>
+<li><p>Informed consent：I think that the data our team collected both the weather data and the traffic accident data from a trusted pubblic website,the official San Diego government website.</p></li>
+<li><p>Collection bias：The weather and traffic accident data are all observed events, and the data collected is more focued on the facts that happened instead of subjective observation. The factual focused data could help us reduce collection bias.</p></li>
+<li><p>Limit PII exposure： Our data, though collected from various person and events, do not contain much personally identifiable information, there are no obvious part in our data that can lead to identification of certain indivisual.</p></li>
+<li><p>Downstream bias mitigation: The data we are using are collected comprehensively thoughout all the traffic accidents rigardless of their race, gender or religious backgrounds.</p></li>
+<li><p>Data security: Since the data are public accessible, our job of keeping our own data safe is to make our repo private and only grant access to relative indivisuals.</p></li>
+<li><p>Right to be forgotten: We’ll open a contact portal to the public so that if anyone feels they wish to have their data removed, they have the freedom to do so.</p></li>
+<li><p>Data retention plan: We plan on delete the data we’ve collected after week 10</p></li>
+<li><p>Missing perspectives: We plan on talking to the TA and possibly the professor about our assumption to collect another point of view.</p></li>
+<li><p>Dataset bias: The dataset is collected by the San Diego government through factual events e.g.&nbsp;weather, temperature, the number and the type of traffic accidents that happened. In conclusion, I think our dataset is mostly bias free, but we can’t rule out the bias created by the observer of the event. e.g police officer’s view on an accident,</p></li>
+<li><p>Honest representation: we will try our best in representing the data without any bias</p></li>
+<li><p>Privacy in analysis: We will insure that data with PII are not used or displayed unless necessary for the analysis</p></li>
+<li><p>Auditability: We will insure that any analysis we conclude will be reasonable and reproducible</p></li>
+</ul>
+</section>
+<section id="team-contributions" class="level1">
+<h1>Team Contributions</h1>
+<ul>
+<li>Xueyan Shi:
+<ul>
+<li>Dataset collection</li>
+<li>Main designer for EDA and graphs</li>
+<li>Team Management</li>
+</ul></li>
+<li>Leni Dai
+<ul>
+<li>Geisel EDA</li>
+<li>Background</li>
+</ul></li>
+<li>Sungwook Min
+<ul>
+<li>Wong Avery EDA</li>
+<li>Hypothesis</li>
+</ul></li>
+<li>Yang Yu
+<ul>
+<li>EDA summary</li>
+<li>Privacy section</li>
+</ul></li>
+<li>Ahmad Rakha
+<ul>
+<li>Weather EDA</li>
+<li>Timeline</li>
+</ul></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

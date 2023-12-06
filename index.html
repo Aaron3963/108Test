@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Please write one to four paragraphs that describe a very brief overview of why you did this, how you did, and the major findings and conclusions.</p>
 <p>Do you still head to Geisel when it’s freezing cold at 8AM? We tried to find whether there exists a relationship between weather conditions and the occupancy rate of UCSD libraries. Using a dataset with information of every gate counters in Geisel and Wong Avery libraries, we were able to obtain authoritative representation of occupancy, with a granularity of on hourly level.</p>
 <p>After doing some exploratory data analysis, we realized that not only did people visit libraries less during weekends, Fridays are also experiencing less occupancy through out the year. Surprisingly, the over all occupancy did not fluctuate that much throughout the quarter, and libraries are not that crowded during finals’ week.</p>
-<p>At last, we combined Geisel’s data with a weather dataset from NOAA,!!!!!!!!!!!!</p>
+<p>At last, we combined Geisel’s data with a weather dataset from NOAA. Results shows that there is a mediate relationship between temperature and in out traffic of Geisel library.</p>
 </section>
 <section id="research-question" class="level2">
 <h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
@@ -856,15 +856,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In'</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sns.histplot(Geisel_Merged_df[<span class="st">'In'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">0</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribution of In Counts'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribution of In Counts'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'Out'</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(Geisel_Merged_df[<span class="st">'Out'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">1</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribution of Out Counts'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribution of Out Counts'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In_Out_Diff'</span></span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>sns.histplot(Geisel_Merged_df[<span class="st">'In_Out_Diff'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">2</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Distribution of In-Out Difference'</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Distribution of In-Out Difference'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -928,7 +928,7 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>             hue<span class="op">=</span><span class="st">'quarter'</span>, </span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>],</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>             errorbar<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hourly Trend of IN'</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hourly Trend of IN'</span>,fontsize<span class="op">=</span><span class="dv">16</span>)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Hour'</span>)</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'IN count'</span>)</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -947,7 +947,7 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>             hue<span class="op">=</span><span class="st">'quarter'</span>, </span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>],</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>             errorbar<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hourly Trend of OUT'</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hourly Trend of OUT'</span>,fontsize<span class="op">=</span><span class="dv">16</span>)</span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Hour'</span>)</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'OUT count'</span>)</span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -981,7 +981,7 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>])</span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize plot details</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily In Trends of Geisel Library Across Quarters'</span>)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily In Trends of Geisel Library Across Quarters'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
 <span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts'</span>)</span>
 <span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
@@ -1021,7 +1021,7 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>week_range <span class="op">=</span> pd.date_range(<span class="st">'2022-09-19'</span>, <span class="st">'2022-12-10'</span>, freq<span class="op">=</span><span class="st">'W-MON'</span>)</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Fall Quarter Daily In Trends of Geisel Library '</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Fall Quarter Daily In Trends of Geisel Library'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (Monday as labels)'</span>)</span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(week_range, rotation<span class="op">=</span><span class="dv">45</span>)</span>
@@ -1047,7 +1047,7 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>week_range <span class="op">=</span> pd.date_range(<span class="st">'2023-01-04'</span>,<span class="st">'2023-03-15'</span>, freq<span class="op">=</span><span class="st">'W-MON'</span>)</span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Winter Quarter Daily In Trends of Geisel Library '</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Winter Quarter Daily In Trends of Geisel Library'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (Monday as labels)'</span>)</span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(week_range, rotation<span class="op">=</span><span class="dv">45</span>)</span>
@@ -1073,7 +1073,7 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>week_range <span class="op">=</span> pd.date_range(<span class="st">'2023-03-29'</span>,<span class="st">'2023-06-16'</span>, freq<span class="op">=</span><span class="st">'W-MON'</span>)</span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Spring Quarter Daily In Trends of Geisel Library '</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Spring Quarter Daily In Trends of Geisel Library'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (Monday as labels)'</span>)</span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.xticks(week_range, rotation<span class="op">=</span><span class="dv">45</span>)</span>
@@ -1166,15 +1166,15 @@ max    1510.000000  1433.000000   388.000000</code></pre>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In'</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>sns.histplot(WongAvery_Merged_df[<span class="st">'In'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">0</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribution of In Counts'</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribution of In Counts'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'Out'</span></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(WongAvery_Merged_df[<span class="st">'Out'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">1</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribution of Out Counts'</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribution of Out Counts'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for 'In_Out_Diff'</span></span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>sns.histplot(WongAvery_Merged_df[<span class="st">'In_Out_Diff'</span>], bins <span class="op">=</span> <span class="dv">30</span>, ax <span class="op">=</span> axes[<span class="dv">2</span>], kde <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Distribution of In-Out Difference'</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Distribution of In-Out Difference'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1228,7 +1228,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 <span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>             palette<span class="op">=</span>[<span class="st">'#FFA500'</span>,<span class="st">'#3498db'</span>,<span class="st">'#4CAF50'</span>])</span>
 <span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize plot details</span></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily In Trends of WongAvery Library Across Quarters'</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily In Trends of WongAvery Library Across Quarters'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
 <span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts'</span>)</span>
 <span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
@@ -1274,7 +1274,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>daily_mean_wind_speed <span class="op">=</span> wind_df.groupby(wind_df[<span class="st">"datetime"</span>].dt.date)[<span class="st">"Wind_Speed"</span>].mean()</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">17</span>, <span class="dv">7</span>))</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.plot(daily_mean_wind_speed)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily Mean Wind Speed'</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily Mean Wind Speed'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean Wind Speed'</span>)</span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1301,7 +1301,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>            width<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles and labels</span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean Quarter Wind Speed'</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean Quarter Wind Speed'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Quarter'</span>)</span>
 <span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean Wind Speed'</span>)</span>
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
@@ -1332,7 +1332,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span>daily_mean_dry_bulb.index, y<span class="op">=</span>daily_mean_dry_bulb, label<span class="op">=</span><span class="st">'Dry Bulb Temp'</span>, color<span class="op">=</span><span class="st">'#4CAF50'</span>)</span>
 <span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span>daily_mean_sea_surface.index, y<span class="op">=</span>daily_mean_sea_surface, label<span class="op">=</span><span class="st">'Sea Surface Temp'</span>, color<span class="op">=</span><span class="st">'#3498db'</span>)</span>
 <span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily Mean Dry Bulb Temperature and Sea Surface Temperature'</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Daily Mean Dry Bulb Temperature and Sea Surface Temperature'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
 <span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
 <span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
@@ -1366,7 +1366,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>            order<span class="op">=</span>[<span class="st">'Fall'</span>,<span class="st">'Winter'</span>,<span class="st">'Spring'</span>],</span>
 <span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>            width<span class="op">=</span><span class="fl">0.8</span>)</span>
 <span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean Temperatures by Quarter'</span>)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Mean Temperatures by Quarter'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Quarter'</span>)</span>
 <span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
 <span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
@@ -1617,9 +1617,9 @@ max     204.000000   254.000000   175.000000</code></pre>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> pd.plotting.scatter_matrix(frame<span class="op">=</span>merged_df[[<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'Temperature'</span>]],</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>       figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">15</span>),alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>       figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>),alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">False</span>)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Scatter Matrix in Hourly Granularity'</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Scatter Matrix in Hourly Granularity'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -1644,9 +1644,9 @@ max     204.000000   254.000000   175.000000</code></pre>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> pd.plotting.scatter_matrix(frame<span class="op">=</span>daily_df[[<span class="st">'In'</span>, <span class="st">'Out'</span>, <span class="st">'Temperature'</span>]],</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">15</span>),alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>),alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">False</span>)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Scatter Matrix in Daily Granularity'</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Scatter Matrix in Daily Granularity'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -1664,20 +1664,21 @@ max     204.000000   254.000000   175.000000</code></pre>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>winter_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Winter'</span>]</span>
 <span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>spring_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Spring'</span>]</span>
 <span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create regression plots for the first row</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles for the first row</span></span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Fall'</span>)</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Winter'</span>)</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">2</span>].set_title(<span class="st">'Spring'</span>)</span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>palette<span class="op">=</span>[<span class="st">'#FFA500'</span>, <span class="st">'#4CAF50'</span>, <span class="st">'#3498db'</span>]</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create regression plots for the first row</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#FFA500'</span>})</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#3498db'</span>})</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:<span class="st">'#4CAF50'</span>})</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#FFA500'</span>})</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:<span class="st">'#3498db'</span>})</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#4CAF50'</span>})</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles for the first row</span></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Fall'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Winter'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">2</span>].set_title(<span class="st">'Spring'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>

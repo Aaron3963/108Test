@@ -1652,35 +1652,51 @@ max     204.000000   254.000000   175.000000</code></pre>
 <p><img src="index_files/figure-html/cell-47-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Something is showing up! Let’s dig deeper.</p>
+<p>Take a closer look at the daily in/out flow and temperature.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>daily_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>})</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>daily_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:sns.color_palette()[<span class="dv">1</span>]})</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'IN Counts'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'OUT Counts'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Whole Year Relationship between Temperature and Occupancy'</span>,fontsize<span class="op">=</span><span class="dv">24</span>)</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>When combining all quarters, the relationship is some what weak, as there’s many values outside the confidence interval. Maybe things will be better when splitting up quarters to be individuals.</p>
 <div class="cell" data-execution_count="47">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">10</span>))</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for each quarter</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>fall_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Fall'</span>]</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>winter_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Winter'</span>]</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>spring_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Spring'</span>]</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>palette<span class="op">=</span>[<span class="st">'#FFA500'</span>, <span class="st">'#4CAF50'</span>, <span class="st">'#3498db'</span>]</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create regression plots for the first row</span></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#FFA500'</span>})</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#3498db'</span>})</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:<span class="st">'#4CAF50'</span>})</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#FFA500'</span>})</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:<span class="st">'#3498db'</span>})</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#4CAF50'</span>})</span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles for the first row</span></span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Fall'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Winter'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">2</span>].set_title(<span class="st">'Spring'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">10</span>))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for each quarter</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>fall_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Fall'</span>]</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>winter_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Winter'</span>]</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>spring_df <span class="op">=</span> daily_df[daily_df[<span class="st">'Quarter'</span>] <span class="op">==</span> <span class="st">'Spring'</span>]</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>palette<span class="op">=</span>[<span class="st">'#FFA500'</span>, <span class="st">'#4CAF50'</span>, <span class="st">'#3498db'</span>]</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create regression plots for the first row</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#FFA500'</span>})</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#3498db'</span>})</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'In'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:<span class="st">'#4CAF50'</span>})</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>fall_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#FFA500'</span>})</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>winter_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>:<span class="st">'#3498db'</span>})</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>spring_df, x<span class="op">=</span><span class="st">'Out'</span>, y<span class="op">=</span><span class="st">'Temperature'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], scatter_kws<span class="op">=</span>{<span class="st">'s'</span>: <span class="dv">100</span>,<span class="st">'color'</span>: <span class="st">'#4CAF50'</span>})</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles for the first row</span></span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Quarterly Relationship between Temperature and Occupancy'</span>,fontsize<span class="op">=</span><span class="dv">24</span>)</span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Fall'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Winter'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">2</span>].set_title(<span class="st">'Spring'</span>,fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>
+<p><img src="index_files/figure-html/cell-49-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
@@ -1688,7 +1704,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>From the graph above, seems there is a linear relationship between temperature and in/out during Fall and Spring quarter. During Winter quarter, people just keep coming to Geisel regardless of temperature (Let’s go Tritons!).</p>
+<p>From the graph above, seems there is a weak linear relationship between temperature and in/out during Fall and Spring quarter. During Winter quarter, people just keep coming to Geisel regardless of temperature (Let’s go Tritons!).</p>
 <p>We kinda shows that as temperature rises, more people visits Geisel, which proves our hypothesis. But we have to admit that there are outliers in both Fall and Winter quarter, not to mention Winter quarter.</p>
 <p>We conclude that weather may be contributing to people’s deciding on whether to go to Libraries, but many more factors may also interfere it. But it’s also good to clear up the misconception about Geisel being crowed during Finals week. <strong>It’s Always crowed!</strong></p>
 </section>

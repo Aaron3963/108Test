@@ -1653,7 +1653,7 @@ max     204.000000   254.000000   175.000000</code></pre>
 </div>
 </div>
 <p>Take a closer look at the daily in/out flow and temperature.</p>
-<div class="cell">
+<div class="cell" data-execution_count="47">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
@@ -1666,9 +1666,12 @@ max     204.000000   254.000000   175.000000</code></pre>
 <span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Whole Year Relationship between Temperature and Occupancy'</span>,fontsize<span class="op">=</span><span class="dv">24</span>)</span>
 <span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>
+</div>
 </div>
 <p>When combining all quarters, the relationship is some what weak, as there’s many values outside the confidence interval. Maybe things will be better when splitting up quarters to be individuals.</p>
-<div class="cell" data-execution_count="47">
+<div class="cell" data-execution_count="48">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">10</span>))</span>
